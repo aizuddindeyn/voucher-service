@@ -1,0 +1,8 @@
+dependencies {
+    // Sub-module
+    implementation project(':voucher-util')
+    implementation project(':voucher-dal')
+    implementation project(':voucher-core')
+
+    implementation extLib.guava
+}

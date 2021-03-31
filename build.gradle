@@ -1,0 +1,116 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.5.RELEASE'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        maven {
+            url 'https://repo.spring.io/snapshot'
+        }
+        maven {
+            url 'https://repo.spring.io/milestone'
+        }
+    }
+}
+
+allprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    group = 'com.aizuddindeyn'
+    version = '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    compileJava.options.encoding = "UTF-8"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    ext {
+        // Spring Boot App
+        springBootVersion       = '2.3.5.RELEASE'
+        jacksonJava8Version     = '2.11.3'
+
+        // Database
+        h2databaseVersion       = '1.4.200'
+        hibernateJava8Version   = '5.4.22.Final'
+
+        // Logger
+        lmaxDisruptorVersion    = '3.4.2'
+        slf4jVersion            = '1.7.30'
+
+        // Utility Library
+        apacheCommonLangVersion = '3.11'
+        lombokVersion           = '1.18.16'
+        guavaVersion            = '30.0-jre'
+
+        springLib = [
+                springBoot      : "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+                springBootValid : "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}",
+                springBootLog   : "org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}",
+                springBootJpa   : "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+        ]
+
+        dbLib = [
+                h2database      : "com.h2database:h2:${h2databaseVersion}",
+                hibernateJ8     : "org.hibernate:hibernate-java8:${hibernateJava8Version}"
+        ]
+
+        extLib = [
+                apacheLang      : "org.apache.commons:commons-lang3:${apacheCommonLangVersion}",
+                lmax            : "com.lmax:disruptor:${lmaxDisruptorVersion}",
+                slf4jApi        : "org.slf4j:slf4j-api:${slf4jVersion}",
+                lombok          : "org.projectlombok:lombok:${lombokVersion}",
+                guava           : "com.google.guava:guava:${guavaVersion}",
+                jacksonJava8    : "com.fasterxml.jackson.module:jackson-modules-java8:${jacksonJava8Version}"
+        ]
+    }
+
+    configurations {
+        compile {
+            exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+            all*.exclude module: 'spring-boot-starter-logging'
+        }
+    }
+
+    dependencies {
+        // Spring framework
+        implementation springLib.values()
+
+        // Lombok
+        compileOnly extLib.lombok
+        annotationProcessor extLib.lombok
+
+        // Apache Commons
+        implementation extLib.apacheLang
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/resources'
+            }
+        }
+        test {
+            java {
+                srcDir 'src/test/java'
+            }
+            resources {
+                srcDir 'src/test/resources'
+            }
+        }
+    }
+}

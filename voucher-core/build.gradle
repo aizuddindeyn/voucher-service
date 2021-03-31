@@ -1,0 +1,6 @@
+dependencies {
+    // Library
+    implementation extLib.slf4jApi
+    implementation extLib.guava
+    implementation extLib.jacksonJava8
+}

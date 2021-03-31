@@ -1,0 +1,12 @@
+dependencies {
+    // Project
+    implementation project(':voucher-core')
+    implementation project(':voucher-util')
+
+    // Library
+    implementation dbLib.hibernateJ8
+    runtimeOnly dbLib.h2database
+
+    // Utilities
+    implementation extLib.guava
+}

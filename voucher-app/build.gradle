@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://repo.spring.io/snapshot'
+        }
+        maven {
+            url 'https://repo.spring.io/milestone'
+        }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+    // Sub-module
+    implementation project(':voucher-biz-service')
+    implementation project(':voucher-core')
+    implementation project(':voucher-dal')
+    implementation project(':voucher-util')
+
+    // 3rd Party
+    implementation extLib.lmax
+    implementation extLib.guava
+    implementation extLib.jacksonJava8
+}

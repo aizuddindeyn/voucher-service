@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "e7eb26ff-8f3c-40ad-b89a-fec32df89310",
+		"name": "voucher-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/1.0/status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"status\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/status",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/offer/generate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"offer.generate\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"name\": \"Maxis 10% Voucher\",\r\n        \"prefix\": \"MXS\",\r\n        \"codeLength\": 10,\r\n        \"discount\": 10,\r\n        \"expiry\": \"2021-12-31\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/offer/generate",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"offer",
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/voucher/generate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"voucher.generate\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"uniqueId\": \"1234-1234-12-1234\",\r\n        \"expiry\": \"2020-05-31\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/voucher/generate",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"voucher",
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/voucher/validate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"voucher.validate\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"voucher\": \"MXS12345\",\r\n        \"email\": \"aizuddin.kamarudin@gmail.com\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/voucher/validate",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"voucher",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/voucher/redeem",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"voucher.redeem\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"voucher\": \"MXS12345\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/voucher/redeem",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"voucher",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/recipient/register",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"recipient.register\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"name\": \"Aizuddin Kamarudin\",\r\n        \"email\": \"aizuddin.kamarudin@yahoo.com\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/recipient/register",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"recipient",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/1.0/recipient/query",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.globals.set(\"timestampIso\", moment().format(\"YYYY-MM-DD HH:mm:ss.SSS\"));\r",
+							"\r",
+							"let guid = pm.variables.replaceIn('{{$guid}}');\r",
+							"let formattedGuid = guid.replace(/-/g, '').toUpperCase();\r",
+							"pm.globals.set(\"requestId\", formattedGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"header\": {\r\n        \"function\": \"recipient.query\",\r\n        \"version\": \"1.0\",\r\n        \"requestMsgId\": \"{{requestId}}\",\r\n        \"requestTime\": \"{{timestampIso}}\"\r\n    },\r\n    \"body\": {\r\n        \"email\": \"aizuddin.kamarudin@gmail.com\"\r\n    },\r\n    \"signature\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PROTOCOL}}://{{ENDPOINT}}/voucher/1.0/recipient/query",
+					"protocol": "{{PROTOCOL}}",
+					"host": [
+						"{{ENDPOINT}}"
+					],
+					"path": [
+						"voucher",
+						"1.0",
+						"recipient",
+						"query"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

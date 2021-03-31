@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_PATTERN">%d %-5p [%t] [%X{id}] = %m - %c%L%n</Property>
+        <Property name="APP_LOG_PATH">logs/</Property>
+        <Property name="APP_NAME">voucher-service</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="rollingFile"
+                     fileName="${APP_LOG_PATH}${APP_NAME}.log"
+                     filePattern="${APP_LOG_PATH}${APP_NAME}-%d{yyyy-MM-dd HH}-%i.log.gz"
+                     ignoreExceptions="false"
+                     immediateFlush="false">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="200 MB" />
+            </Policies>
+        </RollingFile>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <asyncLogger name="com.aizuddindeyn.voucher" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </asyncLogger>
+        <asyncLogger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </asyncLogger>
+        <asyncRoot level="ERROR" includeLocation="true">
+            <AppenderRef ref="console" />
+        </asyncRoot>
+    </Loggers>
+</Configuration>
